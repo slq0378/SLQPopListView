@@ -2,6 +2,7 @@
 
 ## 弹出列表
 - 在控件上添加一个UIView，点击弹出列表框，选择数据
+- 通过自定义View来实现
 
 ## 效果图
 ![](SLQPopListViewDemo/PopListView.gif)
