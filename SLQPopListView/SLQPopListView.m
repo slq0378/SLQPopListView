@@ -32,75 +32,81 @@
     NSLog(@"dealloc");
 }
 
-- (id)initWithArray:(NSArray *)arr
+- (instancetype)initWithFrame:(CGRect )frame withArray:(NSArray *)arr
 {
-    self = [super initWithFrame:CGRectZero];
-    if (self)
-    {
+    if (self = [super initWithFrame:frame] ) {
+        if (arr.count == 0) {
+            NSLog(@"The array is empty!");
+            return self;
+        }
+        self.hidden = YES;
         self.titles = arr;
         [self addChildViews];
+        // 将self 添加到window
+        [[UIApplication sharedApplication].keyWindow addSubview:self];
+        [[UIApplication sharedApplication].keyWindow insertSubview:self.bgView belowSubview:self];
+     
+        CGFloat height = 0;
+        CGFloat anchorPointY = 0;
+        // 如果目标控件位于屏幕中间线以下，就从控件顶部弹出，否则就从底部弹出
+        if (frame.origin.y > (ScreenHeight / 2.0)) {
+            height = CGRectGetMinY(frame) ;
+            anchorPointY = 1;
+        }
+        else {
+            height = CGRectGetMaxY(frame);
+            anchorPointY = 0;
+        }
+        
+        self.center = CGPointMake(frame.size.width/2 + frame.origin.x, height);
+        CGRect rect = self.frame;
+        // 如果没有超出最右边屏幕，就左对齐，否则右对齐
+        if (CGRectGetMaxX(self.frame) < ScreenWidth) { // 左对齐
+            rect.origin.x += fabs((frame.size.width - self.frame.size.width))/2;
+        }
+        else { // 右对齐
+            rect.origin.x -= fabs((frame.size.width - self.frame.size.width))/2;
+            for (NSInteger i = 0 ; i < self.scrollView.subviews.count ; i ++) {
+                UIView *btn = self.scrollView.subviews[i];
+                if ([btn isKindOfClass:[UIButton class]]) { // 文字右对齐
+                    ((UIButton *)btn).titleLabel.textAlignment = NSTextAlignmentRight;
+                    ((UIButton *)btn).contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+                }
+            }
+        }
+        self.frame = rect;
+        
+        // 创建动画
+        CABasicAnimation *anim = [CABasicAnimation animation];
+        self.layer.anchorPoint = CGPointMake(0.5,anchorPointY);
+        anim.keyPath = @"transform.scale.y";
+        anim.fromValue = @(0);
+        anim.toValue = @(1);
+        anim.repeatCount = 1;
+        [self.layer addAnimation:anim forKey:nil];
+
     }
     return self;
 }
 
-
-- (void)showInView:(UIView *)targetView
+- (void)showInView:(UIView *)targetView offset:(CGPoint)offset
 {
-    if (self.titles.count == 0) {
-        NSLog(@"The array is empty!");
-        return ;
-    }
     self.hidden = NO;
-    [targetView.superview addSubview:self];
-    // 添加背景，点击后隐藏视图
-    [targetView.superview insertSubview:self.bgView belowSubview:self];
-    
+
     CGFloat height = 0;
     CGFloat anchorPointY = 0;
     // 如果目标控件位于屏幕中间线以下，就从控件顶部弹出，否则就从底部弹出
-    if (targetView.center.y > (ScreenHeight / 2.0)) {
-        height = CGRectGetMinY(targetView.frame);
+    if ((targetView.center.y - offset.y) > (ScreenHeight / 2.0)) {
+        height = CGRectGetMinY(targetView.frame) - offset.y;
         anchorPointY = 1;
     }
     else {
-        height = CGRectGetMaxY(targetView.frame);
+        height = CGRectGetMaxY(targetView.frame) - offset.y;
         anchorPointY = 0;
     }
-
-    self.center = CGPointMake(targetView.frame.size.width/2 + targetView.frame.origin.x, height);
-    CGRect rect = self.frame;
-    // 如果没有超出最右边屏幕，就左对齐，否则右对齐
-    if (CGRectGetMaxX(self.frame) < ScreenWidth) { // 左对齐
-        rect.origin.x += fabs((targetView.frame.size.width - self.frame.size.width))/2;
-    }
-    else { // 右对齐
-        rect.origin.x -= fabs((targetView.frame.size.width - self.frame.size.width))/2;
-        for (NSInteger i = 0 ; i < self.scrollView.subviews.count ; i ++) {
-            UIView *btn = self.scrollView.subviews[i];
-            if ([btn isKindOfClass:[UIButton class]]) { // 文字右对齐
-                ((UIButton *)btn).titleLabel.textAlignment = NSTextAlignmentRight;
-                ((UIButton *)btn).contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-            }
-        }
-    }
-    self.frame = rect;
-    
-    // 创建动画
-    CABasicAnimation *anim = [CABasicAnimation animation];
-    self.layer.anchorPoint = CGPointMake(0.5,anchorPointY);
-    anim.keyPath = @"transform.scale.y";
-    anim.fromValue = @(0);
-    anim.toValue = @(1);
-    anim.repeatCount = 1;
-    [self.layer addAnimation:anim forKey:nil];
+    self.center = CGPointMake(self.frame.size.width/2 + targetView.frame.origin.x, height);
 }
 
-- (void)showInView:(UIView *)targetView withArray:(NSArray *)arr
-{
-    self.titles = arr;
-    [self addChildViews];
-    [self showInView:targetView];
-}
 
 /// 添加并布局子控件
 - (void)addChildViews
@@ -109,8 +115,7 @@
         NSLog(@"The array is empty!");
         return ;
     }
-    self.hidden = YES;
-    self.backgroundColor = [UIColor colorWithRed:224/255.0 green:224/255.0 blue:224/255.0 alpha:1];
+    self.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     self.layer.cornerRadius = 10;
     self.layer.masksToBounds = YES;
     
@@ -150,7 +155,7 @@
         btn.tag = ButtonTag + i;
         [btn addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, btn.frame.size.height - 1 , maxWidth + 4, 1)];
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(2, btn.frame.size.height - 1 , maxWidth - 4, 1)];
         line.backgroundColor = [UIColor lightGrayColor];
         [btn addSubview:line];
         
@@ -189,6 +194,9 @@
         bg.userInteractionEnabled = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBgButton:)];
         [bg addGestureRecognizer:tap];
+        
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(clickBgButton:)];
+        [bg addGestureRecognizer:pan];
         _bgView = bg;
     }
     return  _bgView;
