@@ -13,14 +13,31 @@ typedef void (^PopListViewDidClickButton)(NSInteger row,NSString *title);
 @interface SLQPopListView : UIView
 @property (nonatomic, copy) PopListViewDidClickButton clicked;
 
-
-- (instancetype)initWithFrame:(CGRect )frame withArray:(NSArray *)arr;
-
+/**
+ *  初始化视图，带有图片
+ *
+ *  @param frame  指定位置，要弹出的控件
+ *  @param titles 标题数组
+ *  @param images 配图数组，这个两个数组要保持一致
+ *
+ *  @return 对象
+ */
+- (instancetype)initWithFrame:(CGRect )frame withTitleArray:(NSArray *)titles imageArray:(NSArray *)images;
+/**
+ *  初始化视图，只有标题
+ *
+ *  @param frame 弹出控件的frame
+ *  @param arr   标题数组
+ *
+ *  @return 对象
+ */
+- (instancetype)initWithFrame:(CGRect )frame withTitleArray:(NSArray *)arr;
 /**
  *  在目标视图中显示
  *
  *  @param targetView 目标视图
- *  @param offset     偏移量，如果是scrollView的话，一定要传入y方向的偏移量
  */
-- (void)showInView:(UIView *)targetView offset:(CGPoint)offset;
+- (void)showInView:(UIView *)targetView;
+- (void)setTitleColor:(UIColor *)color;
+
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E46D80BB1C8C2B2100C065BB /* SLQPopListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E46D80BA1C8C2B2100C065BB /* SLQPopListView.m */; };
 		E47819371C384963005D6B96 /* PopListView.gif in Resources */ = {isa = PBXBuildFile; fileRef = E47819361C384963005D6B96 /* PopListView.gif */; };
 		E4F2B69F1C38467400A0B709 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F2B69E1C38467400A0B709 /* main.m */; };
 		E4F2B6A21C38467400A0B709 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F2B6A11C38467400A0B709 /* AppDelegate.m */; };
@@ -15,10 +16,11 @@
 		E4F2B6AB1C38467400A0B709 /* SLQPopListViewDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4F2B6A91C38467400A0B709 /* SLQPopListViewDemo.xcdatamodeld */; };
 		E4F2B6AD1C38467400A0B709 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4F2B6AC1C38467400A0B709 /* Assets.xcassets */; };
 		E4F2B6B01C38467400A0B709 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F2B6AE1C38467400A0B709 /* LaunchScreen.storyboard */; };
-		E4F2B6BA1C38469300A0B709 /* SLQPopListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F2B6B91C38469300A0B709 /* SLQPopListView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E46D80B91C8C2B2100C065BB /* SLQPopListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLQPopListView.h; sourceTree = "<group>"; };
+		E46D80BA1C8C2B2100C065BB /* SLQPopListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLQPopListView.m; sourceTree = "<group>"; };
 		E47819361C384963005D6B96 /* PopListView.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = PopListView.gif; sourceTree = "<group>"; };
 		E4F2B69A1C38467400A0B709 /* SLQPopListViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLQPopListViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F2B69E1C38467400A0B709 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -31,8 +33,6 @@
 		E4F2B6AC1C38467400A0B709 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4F2B6AF1C38467400A0B709 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E4F2B6B11C38467400A0B709 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E4F2B6B81C38469300A0B709 /* SLQPopListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLQPopListView.h; sourceTree = "<group>"; };
-		E4F2B6B91C38469300A0B709 /* SLQPopListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLQPopListView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +92,8 @@
 		E4F2B6B71C38469300A0B709 /* SLQPopListView */ = {
 			isa = PBXGroup;
 			children = (
-				E4F2B6B81C38469300A0B709 /* SLQPopListView.h */,
-				E4F2B6B91C38469300A0B709 /* SLQPopListView.m */,
+				E46D80B91C8C2B2100C065BB /* SLQPopListView.h */,
+				E46D80BA1C8C2B2100C065BB /* SLQPopListView.m */,
 			);
 			path = SLQPopListView;
 			sourceTree = "<group>";
@@ -171,7 +171,7 @@
 			files = (
 				E4F2B6A51C38467400A0B709 /* ViewController.m in Sources */,
 				E4F2B6A21C38467400A0B709 /* AppDelegate.m in Sources */,
-				E4F2B6BA1C38469300A0B709 /* SLQPopListView.m in Sources */,
+				E46D80BB1C8C2B2100C065BB /* SLQPopListView.m in Sources */,
 				E4F2B6AB1C38467400A0B709 /* SLQPopListViewDemo.xcdatamodeld in Sources */,
 				E4F2B69F1C38467400A0B709 /* main.m in Sources */,
 			);

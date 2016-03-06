@@ -24,6 +24,8 @@
 
 @implementation ViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -67,14 +69,14 @@
             return;
         }
     }
-        NSLog(@"%.2f",self.scrollView.contentOffset.y);
-    SLQPopListView *pop1 = [[SLQPopListView alloc] initWithFrame:CGRectMake(btn.frame.origin.x, CGRectGetMaxY(btn.frame) - self.scrollView.contentOffset.y, 0, 0) withArray:self.titles];
+    SLQPopListView *pop1 = [[SLQPopListView alloc] initWithFrame:CGRectMake(btn.frame.origin.x, CGRectGetMaxY(btn.frame) - self.scrollView.contentOffset.y, 0, 0) withTitleArray:self.titles];
     pop1.tag = 1314;
     __weak UIButton *weakBtn = self.button1;
     pop1.clicked = ^(NSInteger row,NSString *title) {
         [weakBtn setTitle:self.titles[row] forState:UIControlStateNormal];
     };
-    [pop1 showInView:btn offset:self.scrollView.contentOffset];
+    
+    [pop1 showInView:btn];
 }
 
 - (void)btnClick2:(UIButton *)btn
@@ -84,14 +86,13 @@
             return;
         }
     }
-        NSLog(@"%.2f",self.scrollView.contentOffset.y);
-    SLQPopListView *pop1 = [[SLQPopListView alloc] initWithFrame:CGRectMake(btn.frame.origin.x , CGRectGetMaxY(btn.frame) - self.scrollView.contentOffset.y, 0, 0) withArray:self.titles];
+    SLQPopListView *pop1 = [[SLQPopListView alloc] initWithFrame:CGRectMake(btn.frame.origin.x , CGRectGetMaxY(btn.frame) - self.scrollView.contentOffset.y, 0, 0) withTitleArray:self.titles];
     pop1.tag = 1314;
     __weak UIButton *weakBtn = self.button2;
     pop1.clicked = ^(NSInteger row,NSString *title) {
         [weakBtn setTitle:self.titles[row] forState:UIControlStateNormal];
     };
-    [pop1 showInView:btn offset:self.scrollView.contentOffset];
+    [pop1 showInView:btn];
 }
 
 - (void)btnClick3:(UIButton *)btn
@@ -101,14 +102,13 @@
             return;
         }
     }
-    NSLog(@"%.2f",self.scrollView.contentOffset.y);
-    SLQPopListView *pop1 = [[SLQPopListView alloc] initWithFrame:CGRectMake(btn.frame.origin.x , CGRectGetMaxY(btn.frame) - self.scrollView.contentOffset.y, 0, 0) withArray:self.titles];
+    SLQPopListView *pop1 = [[SLQPopListView alloc] initWithFrame:CGRectMake(btn.frame.origin.x , CGRectGetMaxY(btn.frame) - self.scrollView.contentOffset.y, 0, 0) withTitleArray:self.titles];
     pop1.tag = 1314;
     __weak UIButton *weakBtn = self.button3;
     pop1.clicked = ^(NSInteger row,NSString *title) {
         [weakBtn setTitle:self.titles[row] forState:UIControlStateNormal];
     };
-    [pop1 showInView:btn offset:self.scrollView.contentOffset];
+    [pop1 showInView:btn ];
 }
 
 - (void)btnClick:(UIButton *)btn
@@ -119,13 +119,13 @@
         }
     }
         NSLog(@"%.2f",self.scrollView.contentOffset.y);
-    SLQPopListView *pop1 = [[SLQPopListView alloc] initWithFrame:CGRectMake(btn.frame.origin.x, CGRectGetMaxY(btn.frame) -self.scrollView.contentOffset.y, 0, 0) withArray:self.titles];
+    SLQPopListView *pop1 = [[SLQPopListView alloc] initWithFrame:CGRectMake(btn.frame.origin.x, CGRectGetMaxY(btn.frame) -self.scrollView.contentOffset.y, 0, 0) withTitleArray:self.titles];
     pop1.tag = 1314;
     __weak UIButton *weakBtn = self.button;
     pop1.clicked = ^(NSInteger row,NSString *title) {
         [weakBtn setTitle:self.titles[row] forState:UIControlStateNormal];
     };
-    [pop1 showInView:btn offset:self.scrollView.contentOffset];
+    [pop1 showInView:btn];
 }
 
 #pragma mark - 懒加载
